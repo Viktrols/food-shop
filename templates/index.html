@@ -1,0 +1,178 @@
+ {% extends "includes/base.html" %}
+
+ {% block content %}
+ {% load static %}
+<div class="home-wrapper home-1">
+         {% load static %} 
+        <!-- Begin Slider Area One -->
+        <div class="slider-area">
+            <div class="obrien-slider arrow-style" data-slick-options='{
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "infinite": true,
+        "arrows": true,
+        "dots": true,
+        "autoplay" : true,
+        "fade" : true,
+        "autoplaySpeed" : 7000,
+        "pauseOnHover" : false,
+        "pauseOnFocus" : false
+        }' data-slick-responsive='[
+        {"breakpoint":992, "settings": {
+        "slidesToShow": 1,
+        "arrows": false,
+        "dots": true
+        }}
+        ]'>
+                <div class="slide-item slide-1 bg-position slide-bg-1 animation-style-01">
+                    <div class="slider-content">
+                        <h4 class="slider-small-title">Добро пожаловать в магазин</h4>
+                        <h2 class="slider-large-title">Obrien</h2>
+                        <div class="slider-btn">
+                            <a class="obrien-button black-btn" href="{% url 'shop' %}">Выбрать продукты</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Slider Area One End Here -->
+        <!-- Feature Area Start Here -->
+        <div class="feature-area">
+            <div class="container container-default custom-wrapper">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-5 col-md-12 col-custom">
+                        <div class="feature-content-wrapper">
+                            <h2 class="title">{{ whyblock.title }}</h2>
+                            <p class="desc-content">{{ whyblock.text |linebreaksbr}}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-7 col-md-12 col-custom">
+                        <div class="feature-image">
+                            {% load thumbnail %}
+                                        {% thumbnail whyblock.photo "960" crop="center" upscale=True as im %}
+                                            <img  src="{{ im.url }}" alt="Blog Image">{% endthumbnail %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Feature Area End Here -->
+        <!-- Product Area Start Here -->
+        <div class="product-area">
+            <div class="container container-default custom-area">
+                <div class="row">
+                    <div class="col-lg-5 m-auto text-center col-custom">
+                        <div class="section-content">
+                            <h2 class="title-1 text-uppercase">Новинки в нашем магазине</h2>
+                            <div class="desc-content">
+                                <p>Новинки в нашем магазине</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row shop_wrapper grid_3">
+                        {% for product in new %}
+                            <div class="col-md-6 col-sm-6 col-lg-2 col-custom product-area">
+                           
+                                <div class="single-product position-relative">
+                                
+                                    <div class="product-image">
+                                        <a class="d-block" href="product-details.html">
+                                        {% load thumbnail %}
+                                        {% thumbnail product.image "x339" crop="center" upscale=True as im %}
+                                            <img src="{{ im.url }}" alt="Product Image" class="product-image-1 w-100" >{% endthumbnail %}
+                                            
+                                        </a>
+                                    </div>
+                                    <div class="product-content">
+                                        
+                                        <div class="product-title">
+                                            <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name|truncatewords:2 }}</a></h4>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price ">{{ product.price }} ₽</span>
+                                            <span class="old-price"><del>$90.00</del></span>
+                                        </div>
+                                    </div>
+                                    <div class="add-action d-flex position-absolute">
+                                        <a href="cart.html" title="Add To cart">
+                                            <i class="ion-bag"></i>
+                                        </a>
+                                        <a href="compare.html" title="Compare">
+                                            <i class="ion-ios-loop-strong"></i>
+                                        </a>
+                                        <a href="wishlist.html" title="Add To Wishlist">
+                                            <i class="ion-ios-heart-outline"></i>
+                                        </a>
+                                        <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
+                                            <i class="ion-eye"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-content-listview">
+                            
+                                        <div class="product-title">
+                                            <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name }}</a></h4>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price ">{{ product.price }} ₽</span>
+                                            <span class="old-price"><del>$90.00</del></span>
+                                        </div>
+                                        <div class="add-action-listview d-flex">
+                                            <a href="cart.html" title="Add To cart">
+                                                <i class="ion-bag"></i>
+                                            </a>
+                                            <a href="compare.html" title="Compare">
+                                                <i class="ion-ios-loop-strong"></i>
+                                            </a>
+                                            <a href="wishlist.html" title="Add To Wishlist">
+                                                <i class="ion-ios-heart-outline"></i>
+                                            </a>
+                                            <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
+                                                <i class="ion-eye"></i>
+                                            </a>
+                                        </div>
+                                        <p class="desc-content">
+                                            {{ product.description|truncatewords:20}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>   
+                        
+                            
+                        {% endfor %}
+                           
+            </div>
+        </div>
+            
+        
+        <!-- Product Area End Here -->
+        <!-- Banner Fullwidth Area Start Here -->
+        <div class="banner-fullwidth-area">
+            <div class="container custom-wrapper">
+                <div class="row">
+                    <div class="col-md-5 col-lg-6 text-center col-custom">
+                        <div class="banner-thumb h-100 d-flex justify-content-center align-items-center">
+                        {% load thumbnail %}
+                                        {% thumbnail sale.image "x339" crop="center" upscale=True as im %}
+                                            <img src="{{ im.url }}" alt="Product Image" >{% endthumbnail %}
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-6 text-center justify-content-center col-custom">
+                        <div class="banner-flash-content d-flex flex-column align-items-center justify-content-center h-100">
+                            <h2 class="deal-head text-uppercase">Мега-скидки</h2>
+                            <h3 class="deal-title text-uppercase">{{ sale.title }}</h3>
+                            <a href="{% url 'shop' %}" class="obrien-button primary-btn">В магазин</a>
+                            <div class="countdown-wrapper d-flex justify-content-center" data-countdown="{{ timer }}"></div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% include 'includes/latest_posts.html'%}       
+    </div>
+{% endblock %}

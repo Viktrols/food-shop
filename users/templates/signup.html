@@ -1,0 +1,69 @@
+{% extends "includes/base.html" %}
+{% block content %}
+
+<div class="breadcrumbs-area position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="breadcrumb-content position-relative section-content">
+                            <h3 class="title-3">Login-Register</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li>Login-Register</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Area End Here -->
+        <!-- Login Area Start Here -->
+        <div class="login-register-area mt-no-text mb-no-text">
+            <div class="container container-default-2 custom-area">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
+                        <div class="login-register-wrapper">
+                            <div class="section-content text-center mb-5">
+                                <h2 class="title-4 mb-2">Create Account</h2>
+                                <p class="desc-content">Please Register using account detail bellow.</p>
+                            </div>
+
+                             {% if form.errors %}
+  <ul>
+    {% for key, value in form.errors.items %}
+    <div class="alert alert-danger" role="alert">
+      <li>{{ value|escape }}</li></div>
+    {% endfor %}
+  </ul>
+{% endif %}
+                
+                <form method="post" action="{% url 'signup' %}">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <div class="single-input-item mb-3" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+                                <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}</label>
+                                
+     
+                                    {{ field }}
+
+                                    
+                                             
+                        </div>
+                    {% endfor %}
+
+                            
+                                
+                                <div class="single-input-item mb-3">
+                                    <button class="btn obrien-button-2 primary-color">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+{% endblock%}

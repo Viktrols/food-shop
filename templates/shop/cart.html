@@ -1,0 +1,132 @@
+{% extends "includes/base.html" %}
+{% block content %}
+<div class="breadcrumbs-area position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="breadcrumb-content position-relative section-content">
+                            <h3 class="title-3">Корзина</h3>
+                            <ul>
+                                <li><a href="">Home</a></li>
+                                <li>Product Details</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if not cart_items %}
+	<div class="text-center">
+		<br>
+		<h1 class="text-center product_title">
+			В корзине ничего нет
+		</h1>
+		<br>
+		
+			<a href="{% url 'shop' %}" class="btn obrien-button primary-btn ">Перейти в магазин</a>
+		
+
+
+	</div>
+	{% else %}
+    
+<div class="cart-main-wrapper mt-no-text mb-no-text">
+            <div class="container container-default-2 custom-area">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Cart Table Area -->
+                        <div class="cart-table table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="pro-thumbnail">Товар</th>
+                                        <th class="pro-title">Название</th>
+                                        <th class="pro-price">Цена</th>
+                                        <th class="pro-quantity">Количество</th>
+                                        <th class="pro-subtotal">Всего</th>
+                                        <th class="pro-remove">Удалить</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for cart_item in cart_items %}
+                                    <tr>
+                                    
+                                        <td class="pro-thumbnail"><a href="{% url 'product' cart_item.product.id %}"> {% load thumbnail %}
+                                        {% thumbnail cart_item.product.image "x339" crop="center" upscale=True as im %}
+                                            <img src="{{ im.url }}" alt="Product Image" class="product-image-1 w-100" >{% endthumbnail %}
+                                            </a></td>
+                                        <td class="pro-title"><a href="{% url 'product' cart_item.product.id %}">{{ cart_item.product.name }}</a></td>
+                                        <td class="pro-price"><span>{{ cart_item.product.price }}</span></td>
+                                        <td class="pro-quantity">
+                                           {% if cart_item.quantity < cart_item.product.stock %}
+                                               <div class="quantity">
+                                                <a href="{% url 'cart_remove' cart_item.product.id %}" style="margin-right:20px;"><i class="fa fa-minus"></i></a>
+                                                 
+                                                    {{ cart_item.quantity }}
+                                
+                                                    <a href="{% url 'add_cart' cart_item.product.id %}" style="margin-left:20px;"><i class="fa fa-plus"></i></a>
+                                            </div>
+                                            {% else %}
+                                            <div class="quantity">
+                                                <a href="{% url 'cart_remove' cart_item.product.id %}" style="margin-right:20px;"><i class="fa fa-minus"></i></a>
+                                                 
+                                                    {{ cart_item.quantity }}
+                                            </div>
+                                            {% endif %}
+                                        </td>
+                                        <td class="pro-subtotal"><span>{{ cart_item.quantity }} x {{ cart_item.product.price }}</span></td>
+                                        <td class="pro-remove"><a href="{% url 'cart_remove_product' cart_item.product.id %}"><i class="ion-trash-b"></i></a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                      
+                        <!-- Cart Update Option -->
+                        <div class="cart-update-option d-block d-md-flex justify-content-between">
+                            <div class="apply-coupon-wrapper">
+                                <form action="#" method="post" class=" d-block d-md-flex">
+                                    <input type="text" placeholder="Enter Your Coupon Code" required />
+                                    <button class="btn obrien-button primary-btn">Apply Coupon</button>
+                                </form>
+                            </div>
+                            <div class="cart-update mt-sm-16">
+                                <a href="#" class="btn obrien-button primary-btn">Update Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5 ml-auto">
+                        <!-- Cart Calculation Area -->
+                        <div class="cart-calculator-wrapper">
+                            <div class="cart-calculate-items">
+                                <h3>В вашем заказе</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td>Всего товаров</td>
+                                            <td>{{ counter }}</td>
+                                        </tr>
+                                        <tr class="total">
+                                            <td>Сумма без скидки </td>
+                                            <td>{{ total_without_discount }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Скидка</td>
+                                            <td>{{ sale.discount }}%</td>
+                                        </tr>
+                                        
+                                        <tr class="total">
+                                            <td>К Оплате </td>
+                                            <td class="total-amount">{{ total }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <a href="checkout.html" class="btn obrien-button primary-btn d-block">Proceed To Checkout</a>
+                        </div>
+                    </div>
+                </div>{% endif %}
+  </div>
+                </div>
+{% endblock %}
