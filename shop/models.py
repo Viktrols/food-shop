@@ -1,6 +1,11 @@
 from django.db import models
 from django.urls import reverse
 
+from django.utils import timezone
+
+
+now = timezone.now()
+
 
 class Category(models.Model):
 
@@ -47,6 +52,10 @@ class Sale(models.Model):
     date_until = models.DateTimeField()
     discount = models.IntegerField(help_text='скидка в процентах', default=0)
     image = models.ImageField(upload_to='blog', blank=True)
+
+    @property
+    def is_active(self):
+        return now < self.date_until
 
 
 class Cart(models.Model):

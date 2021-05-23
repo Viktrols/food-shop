@@ -149,6 +149,7 @@
         
         <!-- Product Area End Here -->
         <!-- Banner Fullwidth Area Start Here -->
+        {% if sale.is_active %}
         <div class="banner-fullwidth-area">
             <div class="container custom-wrapper">
                 <div class="row">
@@ -171,7 +172,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>{% endif %}
 
 {% include 'includes/latest_posts.html'%}       
     </div>

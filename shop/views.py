@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.exceptions import ObjectDoesNotExist
-from datetime import datetime
 from blog.models import Post, Whyme
 from django.views.generic import ListView
 
@@ -14,8 +13,7 @@ now = timezone.now()
 
 def index(request):
     sale = Sale.objects.latest('id')
-    t = sale.date_until
-    timer = t.strftime('%Y/%m/%d')
+    timer = sale.date_until.strftime('%Y/%m/%d')
     new = Product.objects.all()[:6]
     whyblock = Whyme.objects.latest('id')
     posts = Post.objects.all()[:3]
@@ -72,7 +70,7 @@ def cart_detail(request, total=0, counter=0, total_without_discount=0, cart_item
 		sale = Sale.objects.latest('id')
 		for cart_item in cart_items:
 			counter += cart_item.quantity
-			if sale.date_until > now:
+			if sale.is_active:
 				total_without_discount += (cart_item.product.price * cart_item.quantity)
 				total += (cart_item.product.price * cart_item.quantity)/100 * (100-sale.discount)
 			else:

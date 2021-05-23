@@ -107,15 +107,17 @@
                                             <td>Всего товаров</td>
                                             <td>{{ counter }}</td>
                                         </tr>
+                                        {% if sale.is_active %}
                                         <tr class="total">
                                             <td>Сумма без скидки </td>
                                             <td>{{ total_without_discount }}</td>
                                         </tr>
+                                        
                                         <tr>
                                             <td>Скидка</td>
                                             <td>{{ sale.discount }}%</td>
                                         </tr>
-                                        
+                                        {% endif %}
                                         <tr class="total">
                                             <td>К Оплате </td>
                                             <td class="total-amount">{{ total }}</td>
