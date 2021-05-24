@@ -1,9 +1,5 @@
-<!-- Header Area Start Here -->
-         {% load static %}
+{% load static %}
         <header class="main-header-area">
-            
-            <!-- Header Top Area End Here -->
-            <!-- Main Header Area Start -->
             <div class="main-header">
                 <div class="container container-default custom-area">
                     <div class="row">
@@ -19,8 +15,7 @@
                                 <div class="col-lg-8 col-xl-7 position-static d-none d-lg-block col-custom">
                                     <nav class="main-nav d-flex justify-content-center">
                                         <ul class="nav">
-                                            {% if user.is_authenticated %}
-                                            <li><span class="menu-text">Здравствуйте, {{ user.username }}</span></li>{% endif%}
+                                            
                                             <li>
                                                 <a href="{% url 'shop' %}">
                                                     <span class="menu-text">Магазин</span>
@@ -39,7 +34,7 @@
                                                     <div class="menu-colum">
                                                         <ul>
                                                             <li><span class="mega-menu-text">Товары</span></li>
-                                                            <li><a href="product-details.html">Все товары</a></li>
+                                                            <li><a href="{% url 'shop' %}">Все товары</a></li>
                                                             <li><a href="variable-product-details.html">Веганское</a></li>
                                                             
                                                         </ul>
@@ -48,16 +43,6 @@
                                                 </div>
                                             </li>
                                             
-                                            <li>
-                                                <a href="#">
-                                                    <span class="menu-text">Ресторан</span>
-                                                    <i class="fa fa-angle-down"></i>
-                                                </a>
-                                                <ul class="dropdown-submenu dropdown-hover">
-                                                    <li><a href="frequently-questions.html">FAQ</a></li>
-                                                    <li><a href="my-account.html">My Account</a></li>
-                                                </ul>
-                                            </li>
                                             <li>
                                                 <a href="{% url 'index_blog' %}">
                                                     <span class="menu-text">Блог</span>
@@ -81,6 +66,7 @@
                                         <ul class="nav">
                                             <li class="login-register-wrap d-none d-xl-flex">
                                             {% if user.is_authenticated %}
+                                            <span><a href="{% url 'my_account' user.username %}">Мой аккаунт</a></span>
                                             <span><a href="{% url 'logout' %}">Выйти</a></span>
                                             {% else %}
                                                 <span><a href="{% url 'login' %}">Войти</a></span>
@@ -138,15 +124,16 @@
                                                     <div class="menu-colum">
                                                         <ul>
                                                             <li><span class="mega-menu-text">Категории</span></li>
-                                                            <li><a href="shop.html">кат 1</a></li>
-                                                            <li><a href="shop-right-sidebar.html">кат 2</a></li>
+                                                            {% for category in categories %}
+                                                            <li><a href="{% url 'category_products' category.slug %}">{{ category.name }}</a></li>
+                                                            {% endfor%}
                                                             
                                                         </ul>
                                                     </div>
                                                     <div class="menu-colum">
                                                         <ul>
                                                             <li><span class="mega-menu-text">Товары</span></li>
-                                                            <li><a href="product-details.html">Все</a></li>
+                                                            <li><a href="{% url 'shop' %}">Все</a></li>
                                                             <li><a href="variable-product-details.html">Веганское</a></li>
                                                         </ul>
                                                     </div>
@@ -159,16 +146,6 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <a href="blog-details-fullwidth.html">
-                                                    <span class="menu-text">Ресторан</span>
-                                                    <i class="fa fa-angle-down"></i>
-                                                </a>
-                                                <ul class="dropdown-submenu dropdown-hover">
-                                                    <li><a href="blog.html">Blog Left Sidebar</a></li>
-                                                    <li><a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a></li>
-                                                </ul>
                                             </li>
                                             <li>
                                                 <a href="{% url 'index_blog'%}">
@@ -221,8 +198,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Sticky Header End Here -->
-            <!-- off-canvas menu start -->
             <aside class="off-canvas-wrapper" id="mobileMenu">
                 <div class="off-canvas-overlay"></div>
                 <div class="off-canvas-inner-content">
@@ -247,8 +222,9 @@
                                         <ul class="megamenu dropdown">
                                             <li class="mega-title has-children"><a href="#">Категории</a>
                                                 <ul class="dropdown">
-                                                    <li><a href="shop.html">кат 1</a></li>
-                                                    <li><a href="shop-right-sidebar.html">кат 2</a></li>
+                                                   {% for category in categories %}
+                                                   <li><a href="{% url 'category_products' category.slug %}">{{ category.name }}</a></li>
+                                                   {% endfor %}
                                                 </ul>
                                             </li>
                                             <li class="mega-title has-children"><a href="#">Товары</a>
@@ -257,21 +233,10 @@
                                                     <li><a href="variable-product-details.html">веганское</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="mega-title has-children"><a href="#">Others</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="error404.html">Error 404</a></li>
-                                                    <li><a href="compare.html">Compare Page</a></li>
-                                                </ul>
-                                            </li>
                                         </ul>
                                     </li>
-                                    <li class="menu-item-has-children "><a href="#">Ресторан</a>
-                                        <ul class="dropdown">
-                                            <li><a href="blog.html">Blog Left Sidebar</a></li>
-                                            <li><a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children "><a href="#">Блог</a>
+                                    
+                                    <li class="menu-item-has-children "><a href="{% url 'index_blog' %}">Блог</a>
                                         
                                     </li>
                                     <li><a href="about-us.html">О проекте</a></li>

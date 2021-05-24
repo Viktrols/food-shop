@@ -38,7 +38,7 @@
                                         {{ filter.form }}
                                             
                                        
-                                    </div><button type="submit">Ебучая кнопка</button>
+                                    </div><button type="submit">кнопка</button>
                                 </form>
                             </div>
                         </div>
@@ -49,68 +49,7 @@
                         {% for product in filter.qs %}
                             <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
                            
-                                <div class="single-product position-relative">
-                                
-                                    <div class="product-image">
-                                        <a class="d-block" href="{% url 'product' product.id %}">
-                                        {% load thumbnail %}
-                                        {% thumbnail product.image "x339" crop="center" upscale=True as im %}
-                                            <img src="{{ im.url }}" alt="Product Image" class="product-image-1 w-100" >{% endthumbnail %}
-                                            
-                                        </a>
-                                    </div>
-                                    <div class="product-content">
-                                        
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name }}</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">{{ product.price }} ₽</span>
-                                            <span class="old-price"><del>$90.00</del></span>
-                                        </div>
-                                    </div>
-                                    <div class="add-action d-flex position-absolute">
-                                        <a href="{% url 'add_cart' product.id %}" title="Add To cart">
-                                            <i class="ion-bag"></i>
-                                        </a>
-                                        <a href="compare.html" title="Compare">
-                                            <i class="ion-ios-loop-strong"></i>
-                                        </a>
-                                        <a href="wishlist.html" title="Add To Wishlist">
-                                            <i class="ion-ios-heart-outline"></i>
-                                        </a>
-                                        <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
-                                            <i class="ion-eye"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-content-listview">
-                            
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name }}</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">{{ product.price }} ₽</span>
-                                            <span class="old-price"><del>$90.00</del></span>
-                                        </div>
-                                        <div class="add-action-listview d-flex">
-                                            <a href="{% url 'add_cart' product.id %}" title="Add To cart">
-                                                <i class="ion-bag"></i>
-                                            </a>
-                                            <a href="compare.html" title="Compare">
-                                                <i class="ion-ios-loop-strong"></i>
-                                            </a>
-                                            <a href="wishlist.html" title="Add To Wishlist">
-                                                <i class="ion-ios-heart-outline"></i>
-                                            </a>
-                                            <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
-                                                <i class="ion-eye"></i>
-                                            </a>
-                                        </div>
-                                        <p class="desc-content">
-                                            {{ product.description|truncatewords:20}}
-                                        </p>
-                                    </div>
-                                </div>
+                                {% include 'includes/product_card.html'%}
                             </div>   
                         
                             
@@ -118,30 +57,37 @@
                             
                             
                       
-  </div>
-                        <div class="row">
+  </div>{% if is_paginated %}
+                   <div class="row">
                             <div class="col-sm-12 col-custom">
-                                <div class="toolbar-bottom mt-30">
-                                    <nav class="pagination pagination-wrap mb-10 mb-sm-0">
+                                <div class="toolbar-bottom">
+                                    <nav class="pagination pagination-wrap mb-10 mb-sm-0">  
                                         <ul class="pagination">
+                                        {% if page_obj.has_other_pages %}
+                                        {% if page_obj.has_previous %}
                                             <li class="disabled prev">
-                                                <i class="ion-ios-arrow-thin-left"></i>
-                                            </li>
-                                            <li class="active"><a>1</a></li>
-                                            <li>
-                                                <a href="#">2</a>
-                                            </li>
+                                            <a href="?page={{ products.previous_page_number }}"&laquo;>
+                                                <i class="ion-ios-arrow-thin-left"></i></a> 
+                                            </li>{% endif %}
+                                             {% for i in page_obj.paginator.page_range %}
+                                                {% if page.number == i %}
+                                            <li class="active"><a>{{ i }}</a></li>
+                                          
+                                           {% else %}
+                                            <li class="active">
+                                            <a href="?page={{ i }}">{{ i }}</a>
+                                            </li> {% endif %}{% endfor %}
+                                                
+                                            {% if page_obj.has_next %}
                                             <li class="next">
-                                                <a href="#" title="Next >>"><i class="ion-ios-arrow-thin-right"></i></a>
-                                            </li>
+                                                <a href="?page={{ page_obj.next_page_number }}"&laquo;><i class="ion-ios-arrow-thin-right"></i></a>
+                                            </li>{% endif %}{% endif %}
                                         </ul>
                                     </nav>
-                                    <p class="desc-content text-center text-sm-right">Showing 1 - 12 of 34 result</p>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Bottom Toolbar End -->
-                    </div>
+                        </div>{% endif %}
+ </div>
                     <div class="col-lg-3 col-12 col-custom">
                         <!-- Sidebar Widget Start -->
                         <aside class="sidebar_widget widget-mt">

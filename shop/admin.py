@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Product, Sale
+from .models import Category, Product, Sale, Order, OrderItem
 
 
 @admin.register(Category)
@@ -22,3 +22,13 @@ class SaleAdmin(admin.ModelAdmin):
     list_display = ('pk', 'title')
     search_fields = ('title',)
     empty_value_display = '-пусто-'
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('pk',)
+
+
+@admin.register(OrderItem)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'product')
