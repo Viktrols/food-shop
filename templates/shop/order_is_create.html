@@ -1,0 +1,20 @@
+{% extends "includes/base.html"%}
+
+ {% block content %}
+<div class="breadcrumbs-area position-relative" style="background-image:None">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="breadcrumb-content position-relative section-content">
+                            <h3 class="title-3">ВАШ ЗАКАЗ УСПЕШНО ОФОРМЛЕН<br>ДЛЯ ПОДТВЕРЖДЕНИЯ ЗАКАЗА СЛЕДУЙТЕ ИНСТРУКЦИЯМ, КОТОРЫЕ МЫ ОТПРАВИЛИ НА ВАШ ЭЛЕКТРОННЫЙ АДРЕС</h3>
+                            <ul>
+                                <li><a href="{% url 'index' %}">На главную</a></li>
+                                <li><a href="{% url 'my_account' user.username %}">Мой аккаунт</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  </div>
+  
+ {% endblock %}

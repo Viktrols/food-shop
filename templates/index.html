@@ -4,7 +4,6 @@
  {% load static %}
 <div class="home-wrapper home-1">
          {% load static %} 
-        <!-- Begin Slider Area One -->
         <div class="slider-area">
             <div class="obrien-slider arrow-style" data-slick-options='{
         "slidesToShow": 1,
@@ -26,7 +25,7 @@
         ]'>
                 <div class="slide-item slide-1 bg-position slide-bg-1 animation-style-01">
                     <div class="slider-content">
-                        <h4 class="slider-small-title">Добро пожаловать в магазин</h4>
+                        <h4 class="slider-small-title">Добро пожаловать в магазин<br>здоровой еды</h4>
                         <h2 class="slider-large-title">Obrien</h2>
                         <div class="slider-btn">
                             <a class="obrien-button black-btn" href="{% url 'shop' %}">Выбрать продукты</a>
@@ -36,8 +35,6 @@
                 
             </div>
         </div>
-        <!-- Slider Area One End Here -->
-        <!-- Feature Area Start Here -->
         <div class="feature-area">
             <div class="container container-default custom-wrapper">
                 <div class="row">
@@ -58,14 +55,12 @@
                 </div>
             </div>
         </div>
-        <!-- Feature Area End Here -->
-        <!-- Product Area Start Here -->
         <div class="product-area">
             <div class="container container-default custom-area">
                 <div class="row">
                     <div class="col-lg-5 m-auto text-center col-custom">
                         <div class="section-content">
-                            <h2 class="title-1 text-uppercase">Новинки в нашем магазине</h2>
+                            <h2 class="title-1 text-uppercase">Новые поступления</h2>
                             <div class="desc-content">
                                 <p>Новинки в нашем магазине</p>
                             </div>
@@ -75,80 +70,11 @@
                 <div class="row shop_wrapper grid_3">
                         {% for product in new %}
                             <div class="col-md-6 col-sm-6 col-lg-2 col-custom product-area">
-                           
-                                <div class="single-product position-relative">
-                                
-                                    <div class="product-image">
-                                        <a class="d-block" href="product-details.html">
-                                        {% load thumbnail %}
-                                        {% thumbnail product.image "x339" crop="center" upscale=True as im %}
-                                            <img src="{{ im.url }}" alt="Product Image" class="product-image-1 w-100" >{% endthumbnail %}
-                                            
-                                        </a>
-                                    </div>
-                                    <div class="product-content">
-                                        
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name|truncatewords:2 }}</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">{{ product.price }} ₽</span>
-                                            <span class="old-price"><del>$90.00</del></span>
-                                        </div>
-                                    </div>
-                                    <div class="add-action d-flex position-absolute">
-                                        <a href="cart.html" title="Add To cart">
-                                            <i class="ion-bag"></i>
-                                        </a>
-                                        <a href="compare.html" title="Compare">
-                                            <i class="ion-ios-loop-strong"></i>
-                                        </a>
-                                        <a href="wishlist.html" title="Add To Wishlist">
-                                            <i class="ion-ios-heart-outline"></i>
-                                        </a>
-                                        <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
-                                            <i class="ion-eye"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-content-listview">
-                            
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name }}</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">{{ product.price }} ₽</span>
-                                            <span class="old-price"><del>$90.00</del></span>
-                                        </div>
-                                        <div class="add-action-listview d-flex">
-                                            <a href="cart.html" title="Add To cart">
-                                                <i class="ion-bag"></i>
-                                            </a>
-                                            <a href="compare.html" title="Compare">
-                                                <i class="ion-ios-loop-strong"></i>
-                                            </a>
-                                            <a href="wishlist.html" title="Add To Wishlist">
-                                                <i class="ion-ios-heart-outline"></i>
-                                            </a>
-                                            <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
-                                                <i class="ion-eye"></i>
-                                            </a>
-                                        </div>
-                                        <p class="desc-content">
-                                            {{ product.description|truncatewords:20}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>   
-                        
-                            
+                           {% include 'includes/product_card.html' %}
+                            </div>
                         {% endfor %}
-                           
-            </div>
+                  </div>
         </div>
-            
-        
-        <!-- Product Area End Here -->
-        <!-- Banner Fullwidth Area Start Here -->
         {% if sale.is_active %}
         <div class="banner-fullwidth-area">
             <div class="container custom-wrapper">
@@ -177,3 +103,4 @@
 {% include 'includes/latest_posts.html'%}       
     </div>
 {% endblock %}
+

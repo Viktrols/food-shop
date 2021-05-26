@@ -4,6 +4,9 @@ from blog.models import Post, Whyme
 from django.views.generic import ListView
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.views.generic.base import TemplateView
+
 
 from .models import Category, Product, Sale, Cart, CartItem, User, Order, OrderItem
 
@@ -23,16 +26,32 @@ def index(request):
                  'whyblock': whyblock, 'new': new, 'sale':sale, 'timer': timer})
 
 
-class ProductListView(ListView):
-	paginate_by = 2
-	model = Product
-	template_name = 'shop/shop.html'
+def search(request):
+    query = request.GET.get('q')
+    object_list = Product.objects.filter(
+        Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query))
+    return render(request,'shop/search_results.html',
+            {'object_list': object_list, 'query': query})
 
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		context['filter'] = ProductFilter(self.request.GET,
-                            queryset = self.get_queryset())
-		return context
+
+def shop(request):
+	products = Product.objects.all()
+	paginator = Paginator(products, 6)
+	page_number = request.GET.get('page')
+	page = paginator.get_page(page_number)
+	return render(request, 'shop/shop.html', {'page': page, 'paginator': paginator})
+
+	
+# class ProductListView(ListView):
+# 	paginate_by = 2
+# 	model = Product
+# 	template_name = 'shop/shop.html'
+
+# 	def get_context_data(self, **kwargs):
+# 		context = super().get_context_data(**kwargs)
+# 		context['filter'] = ProductFilter(self.request.GET,
+#                             queryset = self.get_queryset())
+# 		return context
 
 
 
@@ -64,7 +83,7 @@ def add_cart(request, product_id):
 		cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
 		cart_item.save()
 
-	return redirect('cart_detail')
+	return redirect(request.META.get('HTTP_REFERER'))
 
 
 def cart_detail(request, total=0, counter=0, total_without_discount=0, cart_items=None, sale=None):
@@ -112,9 +131,11 @@ def order_create(request):
 		else:
 			OrderItem.objects.create(order=order, product=item.product, price=item.product.price, quantity=item.quantity)
 	cart.delete()
-	return redirect('my_account', username=request.user.username)
+	return redirect('order_is_create')
 
 
+class OrderisCreateView(TemplateView):
+    template_name = 'shop/order_is_create.html'
 
 
 def category_products(request, slug):
@@ -132,5 +153,3 @@ def my_account(request, username):
 	user = get_object_or_404(User, username=username)
 	orders =user.orders.all()
 	return render(request, 'my_account.html', {'user': user, 'orders': orders})
-
-

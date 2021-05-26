@@ -15,22 +15,13 @@
                                         </div>
                                         <div class="price-box">
                                             <span class="regular-price ">{{ product.price }} ₽</span>
-                                            <span class="old-price"><del>$90.00</del></span>
                                         </div>
                                     </div>
                                     <div class="add-action d-flex position-absolute">
                                         <a href="{% url 'add_cart' product.id %}" title="Add To cart">
                                             <i class="ion-bag"></i>
                                         </a>
-                                        <a href="compare.html" title="Compare">
-                                            <i class="ion-ios-loop-strong"></i>
-                                        </a>
-                                        <a href="wishlist.html" title="Add To Wishlist">
-                                            <i class="ion-ios-heart-outline"></i>
-                                        </a>
-                                        <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
-                                            <i class="ion-eye"></i>
-                                        </a>
+                                        
                                     </div>
                                     <div class="product-content-listview">
                             
@@ -39,22 +30,12 @@
                                         </div>
                                         <div class="price-box">
                                             <span class="regular-price ">{{ product.price }} ₽</span>
-                                            <span class="old-price"><del>$90.00</del></span>
+                                            
                                         </div>
                                         <div class="add-action-listview d-flex">
                                             <a href="{% url 'add_cart' product.id %}" title="Add To cart">
                                                 <i class="ion-bag"></i>
-                                            </a>
-                                            <a href="compare.html" title="Compare">
-                                                <i class="ion-ios-loop-strong"></i>
-                                            </a>
-                                            <a href="wishlist.html" title="Add To Wishlist">
-                                                <i class="ion-ios-heart-outline"></i>
-                                            </a>
-                                            <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
-                                                <i class="ion-eye"></i>
-                                            </a>
-                                        </div>
+                                            </a> </div>
                                         <p class="desc-content">
                                             {{ product.description|truncatewords:20}}
                                         </p>

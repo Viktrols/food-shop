@@ -1,0 +1,31 @@
+<div class="col-lg-3 col-12 col-custom">
+    <aside class="sidebar_widget widget-mt">
+        <div class="widget_inner">
+            <div class="widget-list widget-mb-1">
+                <h3 class="widget-title">Поиск</h3>
+                    <div class="search-box">
+                        <div class="input-group">
+                            <form id="search" method="get" action="{% url 'search_results' %}">
+							<div class="input-group">
+                            <input type="text" class="form-control" name="q" placeholder="поиск товара">
+                             <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-search"></i></button>
+							</div>
+                            </form></div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="widget-list widget-mb-1">
+            <h3 class="widget-title">Категории</h3>
+                <div class="sidebar-body">
+                    <ul class="sidebar-list">
+                        {% for category in categories %}
+                        <li><a href="{% url 'category_products' category.slug %}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

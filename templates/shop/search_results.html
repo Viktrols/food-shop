@@ -8,10 +8,10 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <div class="breadcrumb-content position-relative section-content">
-                            <h3 class="title-3">Shop Sidebar</h3>
+                            <h3 class="title-3">Результаты поиска по запросу {{ query }}</h3>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Shop</li>
+                                <li><a href="{% url 'shop' %}">Все товары</a></li>
+                                <li>результаты поиска</li>
                             </ul>
                         </div>
                     </div>
@@ -25,22 +25,30 @@
                         <div class="shop_toolbar_wrapper">
                             <div class="shop_toolbar_btn">
                                 <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"><i class="fa fa-th"></i></button>
-                            
+                                
                                 <button data-role="grid_list" type="button" class="btn-list" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
                             </div>
-                            
+                            <div class="shop-select">
+                                
+                            </div>
                         </div><div class="row shop_wrapper grid_3">
-                        {% for product in page %}
+                        {% for product in object_list %}
                             <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
                            
                                 {% include 'includes/product_card.html'%}
                             </div>   
-   
+                        {% empty %}
+                        <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
+                           <h1 style="margin:20px">По запросу <span style="color: #E98C81">{{ query }}</span> ничего не найдено</h1>
+                           
+                           <a href="{% url 'shop' %}" class="btn obrien-button primary-btn d-block">Посмотреть все товары</a>
+                            </div>
                         {% endfor %}
-                  
-  </div>{% include 'includes/pagination.html' %}
+                            
+                            
+                      
+  </div>
  </div>
-{% include 'includes/sidebar.html'%}
-
-                    </div></div>
+                    {% include 'includes/sidebar.html'%}
+</div></div>
     {% endblock %}

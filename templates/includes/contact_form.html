@@ -12,15 +12,14 @@
                                 <form id="mc-form" class="mc-form d-flex position-relative" method="post" action="{% url 'contact' %}">
                                     {% csrf_token %}
                                     {{ contact_form }}
-                                    <button id="mc-submit" class="btn primary-btn obrien-button newsletter-btn position-absolute" type="submit">Subscribe</button>
+                                    <button id="mc-submit" class="btn primary-btn obrien-button newsletter-btn position-absolute" type="submit">Отправить</button>
                                 </form>
-                                <!-- mailchimp-alerts Start -->
+                                
                                 <div class="mailchimp-alerts text-centre">
-                                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                    <div class="mailchimp-success text-success"></div><!-- mailchimp-success end -->
-                                    <div class="mailchimp-error text-danger"></div><!-- mailchimp-error end -->
+                                    <div class="mailchimp-submitting"></div>
+                                    <div class="mailchimp-success text-success"></div>
+                                    <div class="mailchimp-error text-danger"></div>
                                 </div>
-                                <!-- mailchimp-alerts end -->
                             </div>
                         </div>
                     </div>

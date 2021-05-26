@@ -4,9 +4,9 @@
                 <div class="row">
                     <div class="col-lg-5 m-auto text-center col-custom">
                         <div class="section-content">
-                            <h2 class="title-1 text-uppercase">Latest Blog</h2>
+                            <h2 class="title-1 text-uppercase">Obrien <a href="{% url 'index_blog' %}">блог</a></h2>
                             <div class="desc-content">
-                                <p>If you want to know about the organic product then keep an eye on our blog.</p>
+                                <p>Узнайте больше о правильном питании и полезных продуктах.</p>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                                         <span>{{ post.pub_date|date:"m"}}</span>
                                     </div>
                                     <h2 class="post-title">
-                                        <a href="blog.html">{{ post.title|upper }}</a>
+                                        <a href="{% url 'post' post.id %}">{{ post.title|upper }}</a>
                                     </h2>
                                     <p class="desc-content">{{ post.text|truncatewords:20 }}</p>
                                 </div>

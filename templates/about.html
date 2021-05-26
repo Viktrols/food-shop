@@ -1,0 +1,43 @@
+{% extends "includes/base.html" %}
+{% load static %}
+ {% block content %}
+
+<div class="breadcrumbs-area position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="breadcrumb-content position-relative section-content">
+                            <h3 class="title-3">Об авторе и проекте</h3>
+                            <ul>
+                                <li><a href="{% url 'index'%}">На главную</a></li>
+                                <li>О проекте</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feature-area mb-no-text" style="margin-top:50px;">
+            <div class="container container-default custom-area">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-5 col-md-12 col-custom">
+                        <div class="feature-content-wrapper">
+                            <h2 class="title">Привет! Меня зовут Вика, я - создатель этого ecommerce-проекта.</h2>
+                            <p class="desc-content"></p>
+                            <p class="desc-content">Сайт сделан на фреймворке django. Языки Python, Html+CSS и немного JS.</p>
+                            <p class="desc-content"></p>
+                            <p class="desc-content">Шаблоны скачала на <a href="https://hasthemes.com/" target="_blank" >hasthemes.com</a></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-7 col-md-12 col-custom">
+                        <div class="feature-image position-relative">
+                            <img src="{% static 'assets/images/myphoto.jpg' %}" alt="Obrien Feature">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+
+ {% endblock %}

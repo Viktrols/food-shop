@@ -8,8 +8,8 @@
                         <div class="breadcrumb-content position-relative section-content">
                             <h3 class="title-3">{{ category.name }}</h3>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Shop</li>
+                                <li><a href="{% url 'shop' %}">Все товары</a></li>
+                                <li>{{ category.name }}</li>
                             </ul>
                         </div>
                     </div>
@@ -20,61 +20,22 @@
             <div class="container container-default custom-area">
                 <div class="row flex-row-reverse">
                     <div class="col-12 col-custom widget-mt">
-                        
                         <div class="shop_toolbar_wrapper">
                             <div class="shop_toolbar_btn">
                                 <button data-role="grid_4" type="button" class="active btn-grid-4" data-toggle="tooltip" title="4"><i class="fa fa-th"></i></button>
                                 <button data-role="grid_3" type="button" class="btn-grid-3" data-toggle="tooltip" title="3"> <i class="fa fa-th-large"></i></button>
                                 <button data-role="grid_list" type="button" class="btn-list" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
-                            </div>
-                            <div class="shop-select">
-                                <form class="d-flex flex-column w-100" action="#">
-                                    <div class="form-group">
-                                        <select class="form-control nice-select w-100">
-                                            <option selected value="1">Alphabetically, A-Z</option>
-                                            <option value="2">Sort by popularity</option>
-                                            <option value="3">Sort by newness</option>
-                                            <option value="4">Sort by price: low to high</option>
-                                            <option value="5">Sort by price: high to low</option>
-                                            <option value="6">Product Name: Z</option>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
+                            </div>   
                         </div>
                         <div class="row shop_wrapper grid_4">
                          {% for product in page %}
                             <div class="col-lg-3 col-md-6 col-sm-6 col-custom product-area">
-                           {% include 'includes/product_card.html'%}
-                            </div>{% endfor %}
-                            
-                            
-                            
+                                {% include 'includes/product_card.html' %}    
+                            </div>{% endfor %}    
                         </div>
                          {% include 'includes/pagination.html' %}
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {% endblock%}
