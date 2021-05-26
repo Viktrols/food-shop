@@ -153,3 +153,11 @@ def my_account(request, username):
 	user = get_object_or_404(User, username=username)
 	orders =user.orders.all()
 	return render(request, 'my_account.html', {'user': user, 'orders': orders})
+
+
+def page_not_found(request, exception):
+    return render(request, 'misc/404.html', {'path': request.path}, status=404)
+
+
+def server_error(request):
+    return render(request, 'misc/500.html', status=500)
