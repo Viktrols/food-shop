@@ -1,43 +1,37 @@
 <div class="single-product position-relative">
-                                
-                                    <div class="product-image">
-                                        <a class="d-block" href="{% url 'product' product.id %}">
-                                        {% load thumbnail %}
-                                        {% thumbnail product.image "x339" crop="center" upscale=True as im %}
-                                            <img src="{{ im.url }}" alt="Product Image" class="product-image-1 w-100" >{% endthumbnail %}
-                                            
-                                        </a>
-                                    </div>
-                                    <div class="product-content">
-                                        
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name }}</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">{{ product.price }} ₽</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-action d-flex position-absolute">
-                                        <a href="{% url 'add_cart' product.id %}" title="Add To cart">
-                                            <i class="ion-bag"></i>
-                                        </a>
-                                        
-                                    </div>
-                                    <div class="product-content-listview">
-                            
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name }}</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">{{ product.price }} ₽</span>
-                                            
-                                        </div>
-                                        <div class="add-action-listview d-flex">
-                                            <a href="{% url 'add_cart' product.id %}" title="Add To cart">
-                                                <i class="ion-bag"></i>
-                                            </a> </div>
-                                        <p class="desc-content">
-                                            {{ product.description|truncatewords:20}}
-                                        </p>
-                                    </div>
-                                </div>
+    <div class="product-image">
+        <a class="d-block" href="{% url 'product' product.id %}">
+            {% load thumbnail %}
+            {% thumbnail product.image "x339" crop="center" upscale=True as im %}
+                <img src="{{ im.url }}" alt="Product Image" class="product-image-1 w-100" >{% endthumbnail %}</a>
+    </div>
+        <div class="product-content">
+            <div class="product-title">
+                <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name }}</a></h4>
+            </div>
+            <div class="price-box">
+                <span class="regular-price ">{{ product.price }} ₽</span>
+            </div>
+        </div>
+            <div class="add-action d-flex position-absolute">
+                <a href="{% url 'add_cart' product.id %}" title="Add To cart">
+                    <i class="ion-bag"></i>
+                </a>                          
+            </div>
+            <div class="product-content-listview">
+                <div class="product-title">
+                    <h4 class="title-2"> <a href="{% url 'product' product.id %}">{{ product.name }}</a></h4>
+                </div>
+            <div class="price-box">
+                <span class="regular-price ">{{ product.price }} ₽</span>
+            </div>
+            <div class="add-action-listview d-flex">
+                <a href="{% url 'add_cart' product.id %}" title="Add To cart">
+                     <i class="ion-bag"></i>
+                </a>
+            </div>
+                <p class="desc-content">
+                {{ product.description|truncatewords:20}}
+                </p>
+        </div>
+    </div>

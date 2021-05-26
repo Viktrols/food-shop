@@ -1,29 +1,28 @@
 <div class="row">
-                            <div class="col-sm-12 col-custom">
-                                <div class="toolbar-bottom">
-                                    <nav class="pagination pagination-wrap mb-10 mb-sm-0">  
-                                        <ul class="pagination">
-                                         {% if page.has_other_pages %}
-                                        {% if page.has_previous %}
-                                            <li class="disabled prev">
-                                            <a href="?page={{ posts.previous_page_number }}"&laquo;>
-                                                <i class="ion-ios-arrow-thin-left"></i></a> 
-                                            </li>{% endif %}
-                                             {% for i in page.paginator.page_range %}
-                                                {% if page.number == i %}
-                                            <li class="active"><a>{{ i }}</a></li>
-                                          
-                                           {% else %}
-                                            <li class="active">
-                                            <a href="?page={{ i }}">{{ i }}</a>
-                                            </li> {% endif %}{% endfor %}
+    <div class="col-sm-12 col-custom">
+        <div class="toolbar-bottom">
+            <nav class="pagination pagination-wrap mb-10 mb-sm-0">  
+                <ul class="pagination">
+                    {% if page.has_other_pages %}
+                        {% if page.has_previous %}
+                            <li class="disabled prev">
+                                <a href="?page={{ posts.previous_page_number }}"&laquo;>
+                                    <i class="ion-ios-arrow-thin-left"></i></a> 
+                            </li>{% endif %}
+                         {% for i in page.paginator.page_range %}
+                                {% if page.number == i %}
+                                    <li class="active"><a>{{ i }}</a></li>
+                                {% else %}
+                                    <li class="active">
+                                        <a href="?page={{ i }}">{{ i }}</a>
+                                    </li> {% endif %}{% endfor %}
                                                 
-                                            {% if page.has_next %}
-                                            <li class="next">
-                                                <a href="?page={{ page.next_page_number }}"&laquo;><i class="ion-ios-arrow-thin-right"></i></a>
-                                            </li>{% endif %}{% endif %}
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
+                    {% if page.has_next %}
+                    <li class="next">
+                        <a href="?page={{ page.next_page_number }}"&laquo;><i class="ion-ios-arrow-thin-right"></i></a>
+                    </li>{% endif %}{% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

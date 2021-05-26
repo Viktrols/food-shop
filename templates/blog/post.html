@@ -17,34 +17,26 @@
                 </div>
             </div>
         </div>
-
-
  <div class="blog-main-area">
             <div class="container container-default-2 custom-area">
                 <div class="row flex-row-reverse">
                     <div class="col-12 col-custom mt-no-text">
-                        <!-- Blog Details wrapper Area Start -->
                         <div class="blog-post-details">
                             <figure class="blog-post-thumb mb-5">
                             {% load thumbnail %}
-                                        {% thumbnail post.image "960" crop="center" upscale=True as im %}
-                                            <img class="w-100" src="{{ im.url }}" alt="Blog Image">{% endthumbnail %}
-                                
-                            </figure>
+                                {% thumbnail post.image "960" crop="center" upscale=True as im %}
+                                    <img class="w-100" src="{{ im.url }}" alt="Blog Image">
+                                {% endthumbnail %}
+                           </figure>
                             <section class="blog-post-wrapper product-summery">
                                 <div class="section-content">
                                     <h2 class="title-1 mb-3">{{ post.title }}</h2>
                                     <p class="mb-4">{{ post.text |linebreaksbr }}</p>
-                                    
-                                   
                                 </div>
-    
                             </section>
                         </div>
-                        <!-- Blog Details Wrapper Area End -->
-                
-                        <!-- Blog Comments Area End -->
                     </div>
                 </div>
             </div>
-        </div>{% endblock %}
+    </div>
+{% endblock %}
