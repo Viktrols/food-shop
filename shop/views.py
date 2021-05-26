@@ -6,15 +6,13 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.views.generic.base import TemplateView
-
+from django.utils import timezone
 
 from .models import Category, Product, Sale, Cart, CartItem, User, Order, OrderItem
 
-from .filters import ProductFilter
-from django.utils import timezone
-
 
 now = timezone.now()
+
 
 def index(request):
     sale = Sale.objects.latest('id')
@@ -23,7 +21,8 @@ def index(request):
     whyblock = Whyme.objects.latest('id')
     posts = Post.objects.all()[:3]
     return render(request, 'index.html', {'posts': posts,
-                 'whyblock': whyblock, 'new': new, 'sale':sale, 'timer': timer})
+                  'whyblock': whyblock, 'new': new,
+				  'sale': sale, 'timer': timer})
 
 
 def search(request):
@@ -35,24 +34,11 @@ def search(request):
 
 
 def shop(request):
-	products = Product.objects.all()
-	paginator = Paginator(products, 6)
-	page_number = request.GET.get('page')
-	page = paginator.get_page(page_number)
-	return render(request, 'shop/shop.html', {'page': page, 'paginator': paginator})
-
-	
-# class ProductListView(ListView):
-# 	paginate_by = 2
-# 	model = Product
-# 	template_name = 'shop/shop.html'
-
-# 	def get_context_data(self, **kwargs):
-# 		context = super().get_context_data(**kwargs)
-# 		context['filter'] = ProductFilter(self.request.GET,
-#                             queryset = self.get_queryset())
-# 		return context
-
+    products = Product.objects.all()
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+    return render(request, 'shop/shop.html', {'page': page, 'paginator': paginator})
 
 
 def product(request, product_id):
@@ -61,9 +47,9 @@ def product(request, product_id):
 
 
 def _cart_id(request):
-	cart = request.session.session_key
-	if not cart:
-		cart = request.session.create()
+    cart = request.session.session_key
+    if not cart:
+        cart = request.session.create()
 	return cart
 
 
@@ -144,8 +130,9 @@ def category_products(request, slug):
 	paginator = Paginator(products, 2)
 	page_number = request.GET.get('page')
 	page = paginator.get_page(page_number)
-	return render(request, 'shop/category.html', {'category': category, 'products': products,
-	'page': page, 'paginator': paginator})
+	return render(request, 'shop/category.html', {
+				 'category': category, 'products': products,
+				 'page': page, 'paginator': paginator})
 
 
 @login_required

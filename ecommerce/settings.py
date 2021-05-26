@@ -125,14 +125,11 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',}}
 
 
-#  подключаем движок filebased.EmailBackend
-#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-# указываем директорию, в которую будут складываться файлы писем
-#EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+#  для отправки сообщений с вашей почты на почту юзеров
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'viktrols@yandex.ru' # ваш email
+DEFAULT_FROM_EMAIL = 'viktrols@yandex.ru' 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'viktrols' # ваш логин на яндексе
+EMAIL_HOST_USER = 'viktrols'
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

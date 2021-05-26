@@ -14,4 +14,3 @@ class PostAdmin(admin.ModelAdmin):
 class WhymeAdmin(admin.ModelAdmin):
     list_display = ('pk', 'title', 'text')
     search_fields = ('text', 'title')
-    
